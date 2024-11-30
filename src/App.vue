@@ -1,9 +1,10 @@
 <script lang="ts">
 import Headline from './components/Headline.vue';
+import Top from './components/Top.vue';
 
 export default {
   name: 'App',
-  components: { Headline },
+  components: { Headline, Top },
   data() {
     return {
       topMsg: 'Searching for Abbys...',
@@ -55,9 +56,12 @@ export default {
 </script>
 
 <template>
-  <main>
-    <Headline :msg="topMsg"></Headline>
-    <Headline v-if="numAbbys" :msg="numAbbys"></Headline>
+  <main class="max-w-screen-lg m-auto">
+    <Top></Top>
+    <div class="my-8 max-w-screen-lg border border-black p-8">
+      <Headline class="mt-[-2rem]" :msg="topMsg"></Headline>
+      <Headline v-if="numAbbys" :msg="numAbbys"></Headline>
+    </div>
   </main>
 </template>
 

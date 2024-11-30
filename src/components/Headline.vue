@@ -12,7 +12,7 @@ export default {
 
 <template>
   <div>
-    <h1 class="text-4xl text-center my-8">{{ msg }}</h1>
+    <div class="text-4xl text-center my-4">{{ msg }}</div>
   </div>
 </template>
 
