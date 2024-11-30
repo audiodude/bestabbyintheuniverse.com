@@ -1,15 +1,15 @@
 <script lang="ts">
-import Headline from './components/Headline.vue';
 import Top from './components/Top.vue';
 
 export default {
   name: 'App',
-  components: { Headline, Top },
+  components: { Top },
   data() {
     return {
       topMsg: 'Searching for Abbys...',
       numAbbys: '',
       abbyCount: 5555,
+      doneSearching: false,
     };
   },
   mounted() {
@@ -46,9 +46,36 @@ export default {
           const scale = Math.pow(1.7, delayDirection);
           delay = delay + delay * scale * delayDirection;
           setTimeout(updateNum, timeout + delay);
+        } else {
+          this.doneSearching = true;
         }
       };
 
+      let numDots = 3;
+      const updateProgress = () => {
+        this.topMsg = 'Searching for Abbys' + '.'.repeat(numDots);
+        switch (numDots) {
+          case 3:
+            numDots = 0;
+            break;
+          case 2:
+            numDots = 3;
+            break;
+          case 1:
+            numDots = 2;
+            break;
+          case 0:
+            numDots = 1;
+            break;
+        }
+        if (this.abbyCount < 100_000_000_000) {
+          setTimeout(updateProgress, 400);
+        } else {
+          this.topMsg = 'Abby search complete!';
+        }
+      };
+
+      updateProgress();
       updateNum();
     },
   },
@@ -59,8 +86,10 @@ export default {
   <main class="max-w-screen-lg m-auto">
     <Top></Top>
     <div class="my-8 max-w-screen-lg border border-black p-8">
-      <Headline class="mt-[-2rem]" :msg="topMsg"></Headline>
-      <Headline v-if="numAbbys" :msg="numAbbys"></Headline>
+      <div class="m-auto w-4/5">
+        <div class="text-4xl my-4">{{ topMsg }}</div>
+        <div class="text-4xl text-center my-4">{{ numAbbys }}</div>
+      </div>
     </div>
   </main>
 </template>
