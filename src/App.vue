@@ -10,6 +10,8 @@ export default {
       numAbbys: '',
       abbyCount: 5555,
       doneSearching: false,
+      revealAnnounce: false,
+      revealName: false,
     };
   },
   mounted() {
@@ -47,7 +49,15 @@ export default {
           delay = delay + delay * scale * delayDirection;
           setTimeout(updateNum, timeout + delay);
         } else {
-          this.doneSearching = true;
+          setTimeout(() => {
+            this.doneSearching = true;
+            setTimeout(() => {
+              this.revealAnnounce = true;
+              setTimeout(() => {
+                this.revealName = true;
+              }, 4000);
+            }, 1400);
+          }, 3000);
         }
       };
 
@@ -89,6 +99,14 @@ export default {
       <div class="m-auto w-4/5">
         <div class="text-4xl my-4">{{ topMsg }}</div>
         <div class="text-4xl text-center my-4">{{ numAbbys }}</div>
+      </div>
+    </div>
+    <div v-if="doneSearching">
+      <div v-if="revealAnnounce" class="text-4xl text-center my-4">
+        The best Abby in the Universe is...
+      </div>
+      <div v-if="revealName" class="text-4xl text-center my-4">
+        Abby Mudd, San Francisco, CA, USA, Earth, Milky Way!
       </div>
     </div>
   </main>
