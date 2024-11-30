@@ -2,7 +2,7 @@
 
 <template>
   <main>
-    <h1>bestabbyintheuniverse.com</h1>
+    <h1 class="text-pink-500">bestabbyintheuniverse.com</h1>
   </main>
 </template>
 
