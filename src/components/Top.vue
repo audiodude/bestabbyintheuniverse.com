@@ -1,4 +1,8 @@
-<script lang="ts"></script>
+<script lang="ts">
+export default {
+  name: 'Top',
+  };
+</script>
 
 <template>
   <div class="mt-8">
